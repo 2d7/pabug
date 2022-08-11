@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustcinfo.pabug.dao.SiteMapper">
+
+    <resultMap id="SiteBeanResultMap" type="com.ustcinfo.pabug.bean.SiteBean">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="is_unti" jdbcType="INTEGER" property="isUnti" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="ul_class" jdbcType="VARCHAR" property="ulClass" />
+        <result column="date_class" jdbcType="VARCHAR" property="dateClass" />
+        <result column="text_class" jdbcType="VARCHAR" property="textClass" />
+        <result column="is_use" jdbcType="INTEGER" property="isUse" />
+    </resultMap>
+
+    <select id="getSiteByid" resultMap="SiteBeanResultMap">
+        select * from site_bean where id = #{id}
+    </select>
+    <select id="getAllSite" resultMap="SiteBeanResultMap">
+        select * from site_bean where is_use = 1
+    </select>
+
+</mapper>

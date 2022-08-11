@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/pabug?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#    url: jdbc:mysql://192.168.59.106:4001/pabug?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+      host: smtp.mxhichina.com      #阿里云发送服务器地址
+      port: 25                      #端口号
+      username: li.zhe2@ustcinfo.com        #发送人地址
+      password: Lz@56863   #密码
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.ustcinfo.pabug.bean
+
+
+logging:
+  file:
+    path: E:\
+
+
+var:
+  driverPath: D:\Code\Project\pabug\doc\chromedriver.exe
+  mail: li.zhe2@ustc
+##tao.shengnan@ustcinfo.com,lpeng@ustcinfo.com,fang.dengfeng@ustcinfo.com
+#  mail: chen.xinyu@ustcinfo.com,yu.ning@ustcinfo,hou.liangyu@ustcinfo.com
+  cron: 0 0 8,16 * * ?
+#  cron: 0 */5 * * * ? *
+  cron2: 0 0 */3 * * ? *
+  keyword: [大数据,5G,高新技术,数字经济,服务技术,新兴产业,软件,数字化,专精特新,技术创新,互联网,技术中心]

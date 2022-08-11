@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustcinfo.pabug.dao.ResultMapper">
+
+    <resultMap id="ResultBeanResultMap" type="com.ustcinfo.pabug.bean.ResultBean">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="link" jdbcType="VARCHAR" property="link" />
+        <result column="text" jdbcType="VARCHAR" property="text" />
+        <result column="date" jdbcType="VARCHAR" property="date" />
+        <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+        <result column="by_from" jdbcType="VARCHAR" property="byFrom" />
+        <result column="by_from_url" jdbcType="VARCHAR" property="byFromUrl" />
+    </resultMap>
+
+    <!--开启获取自增主键后即在对象中获取自动生成的主键值-->
+    <insert id="addResult" parameterType="com.ustcinfo.pabug.bean.ResultBean"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into result_bean (title,link,text,date,keyword,by_from,by_from_url)
+        VALUES (#{title},#{link},#{text},#{date},#{keyword},#{byFrom},#{byFromUrl});
+    </insert>
+    <insert id="addMail" parameterType="com.ustcinfo.pabug.bean.ResultBean"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into mail_list (title,link,text,date,keyword,by_from,by_from_url,is_send)
+        VALUES (#{title},#{link},#{text},#{date},#{keyword},#{byFrom},#{byFromUrl},0);
+    </insert>
+    <update id="updateMailStatus">
+        update mail_list set is_send=1 where id = #{id};
+    </update>
+    <select id="getReadyMail" resultMap="ResultBeanResultMap">
+        select * from mail_list where is_send = 0;
+    </select>
+    <select id="getLastestResultBySite" resultMap="ResultBeanResultMap">
+        select * from result_bean where by_from = #{name} ORDER BY id desc LIMIT 1;
+    </select>
+
+</mapper>
